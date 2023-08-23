@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const apiKey = "4bf07334da16a38adda5b523ea484d18";
-  const maxArticles = 5;
+  const maxArticles = 1;
 
   function fetchNews(symbol) {
     const apiUrl = `https://gnews.io/api/v4/search?q=${symbol}&token=${apiKey}`;
@@ -19,13 +19,27 @@ document.addEventListener("DOMContentLoaded", () => {
             const newsItem = document.createElement("div");
             newsItem.className = "news-article";
 
-            newsItem.innerHTML = `
-              <h3>${article.title}</h3>
-              <img src="${article.image}" width="10%" height="10%"></img>
-              <p>${article.publishedAt}</p>
-              <p>${article.description}</p>
-              <a href="${article.url}" target="_blank">Read more</a>
-            `;
+            // Create a div for the image and a div for the text content
+            const newsImageDiv = document.createElement("div");
+            const newsContentDiv = document.createElement("div");
+
+            // Set classes for styling
+            newsImageDiv.className = "news-image";
+            newsContentDiv.className = "news-content";
+
+            // Set the content of the image and text divs
+            newsImageDiv.innerHTML = `<img src="${article.image}" width="90%" height="100%">`;
+            newsContentDiv.innerHTML = `
+      <h3>${article.title}</h3>
+      <p>${article.description}</p>
+      <a href="${article.url}" target="_blank">Read more</a>
+    `;
+
+            // Append the image and content divs to the main news item div
+            newsItem.appendChild(newsImageDiv);
+            newsItem.appendChild(newsContentDiv);
+
+            // Append the main news item div to the news container
             newsContainer.appendChild(newsItem);
 
             articleCount++;
@@ -66,6 +80,3 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchNews("cats");
   });
 });
-
-
-
