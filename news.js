@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const apiKey = "4bf07334da16a38adda5b523ea484d18";
-  const maxArticles = 1;
+  const maxArticles = 5;
 
   function fetchNews(symbol) {
     const apiUrl = `https://gnews.io/api/v4/search?q=${symbol}&token=${apiKey}`;
